@@ -17,7 +17,7 @@ function defineReactive(target, key, val) {
 // 劫持对象的所有属性，注意区分对象和数组的情况
 function Observer(value) {
   if (Array.isArray(value)) {
-    //
+    value.__proto__ = arrMethods;
   } else {
     this.walk(value);
   }
@@ -29,6 +29,19 @@ Observer.prototype.walk = function(obj) {
     defineReactive(obj, key, obj[key]);
   }
 }
+
+// 劫持数组
+const arrayProto = Array.prototype;
+const arrMethods = Object.create(arrayProto);
+const methodsToPatch = ['push', 'pop', 'unshift', 'shift', 'splice', 'sort', 'reverse'];
+methodsToPatch.forEach(method => {
+  Object.defineProperty(arrMethods, method, {
+    value(...args) {
+      const res = arrayProto[method].apply(this, args);
+      return res;
+    }
+  })
+})
 
 // 递归劫持
 function observer(value) {
@@ -50,5 +63,3 @@ const obj = {
 }
 
 new Observer(obj);
-set(obj, 't2', 't2 value');
-console.log(obj);
