@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+
+<script type="module">
+import Observer from './vue1.0-dataIntercept/Observer.js';
+const obj = {
+  t: 't value',
+  t1: {
+    tt1: 'tt1 value'
+  },
+  arr: [1, 2, 3]
+}
+
+new Observer(obj);
+obj.t1.tt1 = '123';
+obj.arr.push(4);
+</script>
+
+</html>
