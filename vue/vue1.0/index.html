@@ -8,18 +8,21 @@
 </body>
 
 <script type="module">
-import Observer from './vue1.0-dataIntercept/Observer.js';
-const obj = {
-  t: 't value',
-  t1: {
-    tt1: 'tt1 value'
-  },
-  arr: [1, 2, 3]
-}
+import Vue from './vue1.0-dataProxy/index.js';
+const vue = new Vue({
+	data() {
+		return {
+		  t: 't value',
+		  t1: {
+		    tt1: 'tt1 value'
+		  },
+		  arr: [1, 2, 3]
+		}
+	}
+})
+console.log(vue);
+vue.t
 
-new Observer(obj);
-obj.t1.tt1 = '123';
-obj.arr.push(4);
 </script>
 
 </html>
