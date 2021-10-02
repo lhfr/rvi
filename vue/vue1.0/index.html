@@ -1,36 +1,41 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <title>Vue1.0</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>{{a}}{{a}}</div>
+<!--     <div>{{b}}{{b}}</div>
+    <div>{{ c.d }}</div> -->
+    <!-- <div>{{ arr }}</div> -->
+  </div>
 </body>
 
 <script type="module">
-import Vue from './vue1.0-dataResponse/index.js';
-import Watcher from './vue1.0-dataResponse/Watcher.js';
-
-const vue = new Vue({
-	data() {
-		return {
-		  a: 1,
-		  b: 2,
-		  c: {
-		    d: 3
-		  },
-		  arr: [1, 2, 3]
-		}
-	}
-})
-
-// 依赖收集测试
-new Watcher(() => { console.log(123) });
-vue.a
-vue.a 
-vue.a = 4
-// new Watcher(() => { console.log(456) });
-// vue.c
+  import Vue from './vue1.0-dataCompile/index.js';
+  const vue = new Vue({
+    el: '#app',
+    data() {
+      return {
+        a: 1,
+        b: 2,
+        c: {
+          d: 3
+        },
+        arr: [1, 2, 3],
+      }
+    },
+  })
+  setTimeout(() => {
+  	vue.a
+  	vue.a
+  	vue.a = 5
+  }, 2000);
 </script>
 
 </html>
+
