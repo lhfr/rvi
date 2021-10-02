@@ -8,21 +8,29 @@
 </body>
 
 <script type="module">
-import Vue from './vue1.0-dataProxy/index.js';
+import Vue from './vue1.0-dataResponse/index.js';
+import Watcher from './vue1.0-dataResponse/Watcher.js';
+
 const vue = new Vue({
 	data() {
 		return {
-		  t: 't value',
-		  t1: {
-		    tt1: 'tt1 value'
+		  a: 1,
+		  b: 2,
+		  c: {
+		    d: 3
 		  },
 		  arr: [1, 2, 3]
 		}
 	}
 })
-console.log(vue);
-vue.t
 
+// 依赖收集测试
+new Watcher(() => { console.log(123) });
+vue.a
+vue.a 
+vue.a = 4
+// new Watcher(() => { console.log(456) });
+// vue.c
 </script>
 
 </html>
