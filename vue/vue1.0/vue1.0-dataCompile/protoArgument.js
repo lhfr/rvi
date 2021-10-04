@@ -17,8 +17,21 @@ methodsToPatch.forEach(method => {
 		value: function(...args) {
 			// 完成方法的本职工作，比如 this.arr.push(xx)
 			const ret = arrayProto[method].apply(this, args)
+			const ob = this.__ob__
 			// 将来接着实现响应式相关的能力
-			console.log('array reactive')
+			let inserted
+			switch (method) {
+				case 'push':
+				case 'unshift':
+					inserted = args
+					break
+				case 'splice':
+					inserted = args.slice(2)
+					break
+			}
+			// 对新增的元素进行响应式处理
+			if (inserted) ob.observeArray(inserted)
+			ob.dep.notify()
 			return ret
 		},
 		configurable: true,

@@ -8,11 +8,8 @@
 
 <body>
   <div id="app">
-    <div>{{c.e}}</div>
-    <!-- <div>{{c.e}}</div> -->
-<!--     <div>{{b}}{{b}}</div>
-    <div>{{ c.d }}</div> -->
-    <!-- <div>{{ arr }}</div> -->
+    <!-- <div>{{b.c}}</div> -->
+    <div>{{arr}}</div>
   </div>
 </body>
 
@@ -23,21 +20,18 @@ const vue = new Vue({
   data() {
     return {
       a: 1,
-      b: 2,
-      c: {
-        e: 3
+      b: {
+        c: 3
       },
       arr: [1, 2, 3],
     }
   },
 })
 
-vue.c = {e: 4};
-// vue.c
-// vue.c
-vue.c.e = 5;
-vue.c.e = 6;
-console.log(vue);
+vue.b = {e: 4};
+vue.b.c = 5;
+vue.arr.push(4);
+
 </script>
 
 </html>
