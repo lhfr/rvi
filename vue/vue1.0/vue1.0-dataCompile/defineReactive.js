@@ -1,30 +1,32 @@
-import observe from './observe.js';
-import Dep from './Dep.js';
+/**
+ * 通过 Object.defineProperty 为 obj.key 设置 getter、setter 拦截
+ */
+import observe from './observe.js'
+import Dep from './Dep.js'
 
 // 劫持对象的单个属性，注意无法劫持对象的新属性
+// 还需要给对象本身添加响应，所以需要对 observe 的返回值进行处理
 export default function defineReactive(target, key, val) {
-  observe(val);
-  const dep = new Dep();
+  const childOb = observe(val)
+  const dep = new Dep()
   Object.defineProperty(target, key, {
     get() {
-      if (Dep.target) dep.depend();
-      console.log('===get===', key, val);
-      console.log(Dep.target);
-      return val;
+      if (Dep.target) {
+        dep.depend()
+        if (childOb) {
+          childOb.dep.depend()
+        }
+      }
+      console.log(`===get ${key}===`, Dep.target)
+      return val
     },
     set(newVal) {
-      if (newVal === val) return;
-      console.log('===set===', key, newVal);
-      console.log('===dep===', dep);
-      val = newVal;
+      if (newVal === val) return
+      val = newVal
       // 劫持新对象属性
-      observe(val);
-      dep.notify();
+      observe(val)
+      console.log(`===set ${key}===`, dep)
+      dep.notify()
     }
   })
 }
-
-// 劫持对象的新属性
-// function set(target, key, val) {
-//   defineReactive(target, key, val);
-// }

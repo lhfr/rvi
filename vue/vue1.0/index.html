@@ -8,7 +8,8 @@
 
 <body>
   <div id="app">
-    <div>{{a}}{{a}}</div>
+    <div>{{c.e}}</div>
+    <!-- <div>{{c.e}}</div> -->
 <!--     <div>{{b}}{{b}}</div>
     <div>{{ c.d }}</div> -->
     <!-- <div>{{ arr }}</div> -->
@@ -16,25 +17,27 @@
 </body>
 
 <script type="module">
-  import Vue from './vue1.0-dataCompile/index.js';
-  const vue = new Vue({
-    el: '#app',
-    data() {
-      return {
-        a: 1,
-        b: 2,
-        c: {
-          d: 3
-        },
-        arr: [1, 2, 3],
-      }
-    },
-  })
-  setTimeout(() => {
-  	vue.a
-  	vue.a
-  	vue.a = 5
-  }, 2000);
+import Vue from './vue1.0-dataCompile/index.js';
+const vue = new Vue({
+  el: '#app',
+  data() {
+    return {
+      a: 1,
+      b: 2,
+      c: {
+        e: 3
+      },
+      arr: [1, 2, 3],
+    }
+  },
+})
+
+vue.c = {e: 4};
+// vue.c
+// vue.c
+vue.c.e = 5;
+vue.c.e = 6;
+console.log(vue);
 </script>
 
 </html>
