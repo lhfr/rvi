@@ -8,14 +8,12 @@
 
 <body>
   <div id="app">
-    <div v-bind:name="a"></div>
-    <input type="text" v-model="b.c" />
-    <div>{{b.c}}</div>
+    <div>{{b.c}}</div><div>{{b.c}}</div>
   </div>
 </body>
 
 <script type="module">
-import Vue from './vue1.0-dataInstruct/index.js';
+import Vue from './src/index.js';
 const vue = new Vue({
   el: '#app',
   data() {
@@ -29,7 +27,8 @@ const vue = new Vue({
   },
 })
 
-vue.b.c = 4
+vue.b = { c: 4 }
+vue.b.c = 5 
 
 </script>
 
